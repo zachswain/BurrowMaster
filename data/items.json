@@ -1,0 +1,16 @@
+[
+    {
+        "name" : "Improvised Weapon",
+        "type" : "Weapon",
+        "subType" : "Improvised",
+        "mainPaw" : true,
+        "offPaw" : true,
+        "mainAndOffPaw" : false,
+        "body" : false,
+        "doubleBody" : false,
+        "offAndBody" : false,
+        "defense" : 0,
+        "damageDice" : "1d4",
+        "uses" : 3
+    }
+]
