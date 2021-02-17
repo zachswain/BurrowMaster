@@ -18,7 +18,7 @@ module.exports = class MouseCommand extends BaseCommand {
 			description: `Manage your Mausritter characters.
 			
 				__Valid Arguments__
-				*create <character name>* - Create a new character.
+				*create [character name] [-b background]* - Create a new character.
 			`,
 
 		});
