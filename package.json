@@ -1,0 +1,12 @@
+{
+  "name": "BurrowMaster",
+  "version": "1.0.0",
+  "description": "A Discord bot for managing Mausritter characters and games",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^12.5.1",
+    "discord.js-commando": "^0.12.2",
+    "sequelize": "^6.5.0",
+    "sqlite3": "^5.0.2"
+  }
+}
