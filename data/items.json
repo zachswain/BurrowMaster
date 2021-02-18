@@ -11,6 +11,7 @@
         "offAndBody" : false,
         "defense" : 0,
         "damageDice" : "1d4",
-        "uses" : 3
+        "uses" : 3,
+        "price" : 1
     }
 ]

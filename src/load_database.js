@@ -1,8 +1,11 @@
 const Database = require("./Database.js");
 const Item = require("./models/Item.js");
-const items = require("../data/items.json");
+const Birthname = require("./models/Birthname.js");
+const Matriname = require("./models/Matriname.js");
 
-console.log(items);
+const items = require("../data/items.json");
+const birthnames = require("../data/birthnames.json");
+const matrinames = require("../data/matrinames.json");
 
 Database.init();
 Database.sync().then(() => {
@@ -13,4 +16,18 @@ Database.sync().then(() => {
                 console.log(`Created ${i.name}`);
             })
     });
+    
+    birthnames.forEach(birthname => {
+        birthname.source = "Mausritter SRD";
+        Birthname.create(birthname).then(bn => {
+                console.log(`Created Birthname => ${bn.name}`);
+        });
+    });
+    
+    matrinames.forEach(matriname => {
+        matriname.source = "Mausritter SRD";
+        Matriname.create(matriname).then(mn => {
+            console.log(`Created Matriname => ${mn.name}`);
+        });
+    })
 });

@@ -5,6 +5,8 @@ const Database = require("../../Database.js");
 const Utils = require("../../utils/utils.js");
 const Config = require("../../Config.js");
 const Character = require("../../models/Character.js");
+const Birthname = require("../../models/Birthname.js");
+const Matriname = require("../../models/Matriname.js");
 const Roll = require("roll");
 
 module.exports = class MouseCommand extends BaseCommand {
@@ -24,7 +26,7 @@ module.exports = class MouseCommand extends BaseCommand {
 		});
 	}
 	
-	run(message, arg) {
+	async run(message, arg) {
 	    message.reply("Yup, working");
 	    
 	    let args = Utils.StringUtils.parseArguments(arg);
@@ -36,7 +38,17 @@ module.exports = class MouseCommand extends BaseCommand {
 		    switch( subCommand.toLowerCase() ) {
 		        case "create":
 		        	let roll = new Roll();
-		        	let name = "Petal Rainflower";
+		        	
+		        	let birthnames = await Birthname.findAll();
+		        	let index = Math.floor(Math.random()*birthnames.length);
+		        	let birthname = birthnames[index].getDataValue("name");
+		        	
+		        	let matrinames = await Matriname.findAll();
+		        	index = Math.floor(Math.random()*matrinames.length);
+		        	let matriname = matrinames[index].getDataValue("name");
+		        	
+		        	console.log(birthnames);
+		        	let name = `${birthname} ${matriname}`;
 		        	let background = "Sap tapper";
 		        	let str = roll.roll('3d6b2').result;
 		        	let dex = roll.roll('3d6b2').result;

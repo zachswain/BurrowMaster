@@ -1,0 +1,27 @@
+[
+    {
+        "name" : "Ada",
+        "gender" : "female"
+    },
+    {
+        "name" : "Agate",
+        "gender" : "female"
+    },
+    {
+        "name" : "Agnes",
+        "gender" : "female"
+    },
+    
+    {
+        "name" : "Alder",
+        "gender" : "male"
+    },
+    {
+        "name" : "Ambrose",
+        "gender" : "male"
+    },
+    {
+        "name" : "Anise",
+        "gender" : "male"
+    }
+]

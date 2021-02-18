@@ -23,7 +23,8 @@ if( Database.initialized() ) {
 bot.registry
 	.registerDefaultTypes()
 	.registerGroups([
-        "characters"
+        "characters",
+        "roll"
 	])
 	.registerDefaultGroups()
 	.registerCommandsIn(path.join(__dirname, 'commands'));

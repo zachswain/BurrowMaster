@@ -65,6 +65,10 @@ Object.assign(module.exports, {
     	    type : Sequelize.CITEXT,
     	    defaultValue : null
     	},
+    	price : {
+    	    type : Sequelize.INTEGER,
+    	    defaultValue : null
+    	},
     	source : {
     	    type: Sequelize.CITEXT
     	}
@@ -74,7 +78,7 @@ Object.assign(module.exports, {
     options : {
         indexes : [
             {
-                name : "name_unique",
+                name : "item_name_unique",
                 unique : true,
                 fields : ["name"]
             }
