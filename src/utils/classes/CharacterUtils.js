@@ -8,7 +8,12 @@ module.exports = {
 		if( !character ) {
 			message.reply("Invalid character");
 		} else {
-		    message.reply("Character details TBD");
+		    let char=`Name: ${character.getDataValue('characterName')}`;
+        	char += `\nLevel: ${character.getDataValue('level')}`;
+        	char += `\nBackground: ${character.getDataValue('background')}`;
+        	char += `\nSTR: ${character.getDataValue('currentSTR')}\nDEX: ${character.getDataValue('currentDEX')}\nWIL: ${character.getDataValue('currentWIL')}`;
+        	
+        	message.channel.send(char);
 		}
     },
     

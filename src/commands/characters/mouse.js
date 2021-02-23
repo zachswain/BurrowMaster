@@ -27,8 +27,6 @@ module.exports = class MouseCommand extends BaseCommand {
 	}
 	
 	async run(message, arg) {
-	    message.reply("Yup, working");
-	    
 	    let args = Utils.StringUtils.parseArguments(arg);
 		let subCommand = args.shift();
 		
@@ -36,7 +34,25 @@ module.exports = class MouseCommand extends BaseCommand {
 			this.displaySelf(message);
 		} else {
 		    switch( subCommand.toLowerCase() ) {
+		    	case "retire":
+		    		var character = await Character.getCharacterByAuthorID(message.author.id);
+		    		
+		    		if( null==character ) {
+		    			message.reply("You have no active mouse, create one with ``!mouse create``");
+		    			return;
+		    		}
+		    		
+		    		await character.destroy();
+		    		message.reply("Character retired.");
+		    		break;
 		        case "create":
+		        	var character = await Character.getCharacterByAuthorID(message.author.id);
+		        	
+		        	if( null!=character ) {
+		        		message.reply("You already have a mouse.  Use ``!mouse retire`` to retire it and generate a new one.");
+		        		return;
+		        	}
+		        	
 		        	let roll = new Roll();
 		        	
 		        	let birthnames = await Birthname.findAll();
@@ -47,14 +63,47 @@ module.exports = class MouseCommand extends BaseCommand {
 		        	index = Math.floor(Math.random()*matrinames.length);
 		        	let matriname = matrinames[index].getDataValue("name");
 		        	
-		        	console.log(birthnames);
 		        	let name = `${birthname} ${matriname}`;
+		        	let level = 1;
+		        	let xp = 0;
+		        	let pips = 0;
+		        	
 		        	let background = "Sap tapper";
+		        	let birthSign = "Mother";
+		        	let coat = "Grey";
+		        	let pattern = "Flecked";
+		        	
 		        	let str = roll.roll('3d6b2').result;
 		        	let dex = roll.roll('3d6b2').result;
 		        	let wil = roll.roll('3d6b2').result;
 		        	
-		        	message.channel.send(`Name: ${name}\nBackground: ${background}\nSTR: ${str}, DEX: ${dex}, WIL: ${wil}`);
+		        	console.log("authorID: " + message.author.id);
+		        	
+		        	character = Character.create({
+		        		characterName : name,
+		        		authorID : message.author.id,
+		        		guildID : message.guild.id,
+		        		level : level,
+		        		xp : xp,
+		        		background: background,
+		        		birthSign : birthSign,
+		        		coat : coat,
+		        		pattern : pattern,
+		        		currentSTR : str,
+		        		maxSTR : str,
+		        		currentDEX : dex,
+		        		maxDEX : dex,
+		        		currentWIL : wil,
+		        		maxWIL : wil,
+		        		pips : pips
+		        	});
+		        	
+		        	let char=`Name: ${name}`;
+		        	char += `\nLevel: ${level}`;
+		        	char += `\nBackground: ${background}`;
+		        	char += `\nSTR: ${str}\nDEX: ${dex}\nWIL: ${wil}`;
+		        	
+		        	message.channel.send(char);
 		        	break;
 		    }
 		}

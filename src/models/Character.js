@@ -19,11 +19,55 @@ Object.assign(module.exports, {
     		type: Sequelize.STRING,
     		defaultValue : null
     	},
+    	level : {
+    	    type : Sequelize.INTEGER,
+    	    defaultValue : 0
+    	},
     	xp : {
     	  type : Sequelize.INTEGER,
     	  defaultValue : 0
     	},
-    	pip  :{
+    	background : {
+    	    type : Sequelize.STRING,
+    	    allowNull : false
+    	},
+    	birthSign : {
+    	    type : Sequelize.STRING,
+    	    allowNull : false
+    	},
+    	coat : {
+    	    type : Sequelize.STRING,
+    	    allowNull : false
+    	},
+    	pattern : {
+    	    type : Sequelize.STRING,
+    	    allowNull : false
+    	},
+    	currentSTR : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	maxSTR : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	currentDEX : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	maxDEX : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	currentWIL : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	maxWIL : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false
+    	},
+    	pips : {
     	  type : Sequelize.INTEGER,
     	  defaultValue : 0
     	},
@@ -38,13 +82,16 @@ Object.assign(module.exports, {
         // { modelName : InventoryEntry.modelName, relationship : "hasMany" }
     ],
     options : {
+        /*
         indexes : [
             {
                 name : "authorID_unique",
                 unique : true,
                 fields : ["authorID"]
             }
-        ]
+        ],
+        */
+        paranoid : true
     },
     
     getCharacterByAuthorID(authorID) {
