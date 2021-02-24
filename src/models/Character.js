@@ -4,6 +4,7 @@ module.exports = {
 
 const Sequelize = require("sequelize");
 const Database = require("../Database.js");
+const InventoryEntry = require("./InventoryEntry.js");
 
 Object.assign(module.exports, {
     model : {
@@ -79,7 +80,7 @@ Object.assign(module.exports, {
     relationships : [
         // { modelName : Property.modelName, relationship : "hasMany" },
         // { modelName : WishlistEntry.modelName, relationship : "hasMany" },
-        // { modelName : InventoryEntry.modelName, relationship : "hasMany" }
+        { modelName : InventoryEntry.modelName, relationship : "hasMany" }
     ],
     options : {
         /*
@@ -96,7 +97,7 @@ Object.assign(module.exports, {
     
     getCharacterByAuthorID(authorID) {
         var model = Database.getModel(this.modelName);
-		return model.findOne({ where : { authorID : authorID }});
+		return model.findOne({ where : { authorID : authorID }}, { include : Database.getModel(InventoryEntry.modelName) });
     },
     
     getCharacterByCharacterName(characterName) {

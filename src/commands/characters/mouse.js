@@ -7,7 +7,11 @@ const Config = require("../../Config.js");
 const Character = require("../../models/Character.js");
 const Birthname = require("../../models/Birthname.js");
 const Matriname = require("../../models/Matriname.js");
+const Item = require("../../models/Item.js");
+const InventoryEntry = require("../../models/InventoryEntry.js");
 const Roll = require("roll");
+
+const { createCanvas } = require("canvas");
 
 module.exports = class MouseCommand extends BaseCommand {
 	constructor(client) {
@@ -34,6 +38,26 @@ module.exports = class MouseCommand extends BaseCommand {
 			this.displaySelf(message);
 		} else {
 		    switch( subCommand.toLowerCase() ) {
+		    	case "image":
+		    		
+
+
+					const WIDTH = 100;
+					const HEIGHT = 50;
+					
+					const canvas = createCanvas(WIDTH, HEIGHT);
+					const ctx = canvas.getContext("2d");
+					
+					ctx.fillStyle = "#222222";
+					ctx.fillRect(0, 0, WIDTH, HEIGHT);
+					ctx.fillStyle = "#f2f2f2";
+					ctx.font = "32px Arial";
+					ctx.fillText("Hello", 13, 35);
+					
+					const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'hello.png');
+					message.channel.send("Test", attachment);
+
+		    		break;
 		    	case "retire":
 		    		var character = await Character.getCharacterByAuthorID(message.author.id);
 		    		
@@ -77,9 +101,19 @@ module.exports = class MouseCommand extends BaseCommand {
 		        	let dex = roll.roll('3d6b2').result;
 		        	let wil = roll.roll('3d6b2').result;
 		        	
-		        	console.log("authorID: " + message.author.id);
+		        	let weapons = await Item.findAllByItemName("Improvised Weapon");
+		        	let weapon = null;
+		        	if( weapons && weapons.length>0 ) {
+		        		weapon = weapons[0];
+		        	}
+		        	var inventoryEntry = InventoryEntry.createFromItem(weapon);
+			    	//var entry = await inventoryEntry.save();
+			    	//character.addInventoryEntry(entry);
+			    	//var client = message.client;
 		        	
-		        	character = Character.create({
+		        	console.log(weapon);
+		        	
+		        	character = await Character.create({
 		        		characterName : name,
 		        		authorID : message.author.id,
 		        		guildID : message.guild.id,
@@ -98,6 +132,8 @@ module.exports = class MouseCommand extends BaseCommand {
 		        		pips : pips
 		        	});
 		        	
+		        	await character.addInventoryEntry(inventoryEntry);
+		        	
 		        	let char=`Name: ${name}`;
 		        	char += `\nLevel: ${level}`;
 		        	char += `\nBackground: ${background}`;
@@ -111,10 +147,13 @@ module.exports = class MouseCommand extends BaseCommand {
 	
 	displaySelf(message) {
 		Character.getCharacterByAuthorID(message.author.id)
-			.then(character => {
+			.then(async character => {
 				if( !character ) {
 					message.reply("You don't have a mouse registered. (Use ``!mouse create`` to create one!)");
 				} else {
+					console.log(character);
+					var entries = await character.getInventoryEntries();
+					console.log(entries);
 					Utils.CharacterUtils.displayCharacter(message, character);
 				}
 			});
