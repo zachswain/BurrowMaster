@@ -69,6 +69,18 @@ Object.assign(module.exports, {
     	    type : Sequelize.INTEGER,
     	    defaultValue : null
     	},
+    	uses : {
+    	    type : Sequelize.INTEGER,
+    	    defaultValue : null
+    	},
+    	effect : {
+    	    type : Sequelize.STRING,
+    	    defaultValue : null
+    	},
+    	recharge : {
+    	    type : Sequelize.STRING,
+    	    defaultValue : null
+    	},
     	source : {
     	    type: Sequelize.CITEXT
     	}
@@ -88,6 +100,12 @@ Object.assign(module.exports, {
     create(args) {
         var model = Database.getModel(this.modelName);
         return model.create(args);
+    },
+    
+        
+    findOneByItemName(itemName) {
+        var model = Database.getModel(this.modelName);
+        return model.findOne({ where : { name : itemName }})
     },
     
     findAllByItemName(itemName) {

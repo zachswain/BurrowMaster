@@ -7,6 +7,7 @@ const Config = require("../../Config.js");
 const Character = require("../../models/Character.js");
 const Birthname = require("../../models/Birthname.js");
 const Matriname = require("../../models/Matriname.js");
+const Background = require("../../models/Background.js");
 const Item = require("../../models/Item.js");
 const InventoryEntry = require("../../models/InventoryEntry.js");
 const Roll = require("roll");
@@ -24,7 +25,7 @@ module.exports = class MouseCommand extends BaseCommand {
 			description: `Manage your Mausritter characters.
 			
 				__Valid Arguments__
-				*create [character name] [-b background]* - Create a new character.
+				*create [character name] [-b background] [-c coat] [-p pattern] [-s birthsign]* - Create a new character.
 			`,
 
 		});
@@ -77,41 +78,73 @@ module.exports = class MouseCommand extends BaseCommand {
 		        		return;
 		        	}
 		        	
+		        	let background = Utils.StringUtils.stripArgument(args, "-b");
+		        	let coat = Utils.StringUtils.stripArgument(args, "-c");
+		        	let pattern = Utils.StringUtils.stripArgument(args, "-p");
+		        	let birthSign = Utils.StringUtils.stripArgument(args, "-s");
+		        	
+		        	let name = args.join(" ");
+		        	
 		        	let roll = new Roll();
 		        	
-		        	let birthnames = await Birthname.findAll();
-		        	let index = Math.floor(Math.random()*birthnames.length);
-		        	let birthname = birthnames[index].getDataValue("name");
+		        	if( !name ) {
+			        	let birthnames = await Birthname.findAll();
+			        	let index = Math.floor(Math.random()*birthnames.length);
+			        	let birthname = birthnames[index].getDataValue("name");
+			        	
+			        	let matrinames = await Matriname.findAll();
+			        	index = Math.floor(Math.random()*matrinames.length);
+			        	let matriname = matrinames[index].getDataValue("name");
+			        	
+			        	name = `${birthname} ${matriname}`;
+		        	}
 		        	
-		        	let matrinames = await Matriname.findAll();
-		        	index = Math.floor(Math.random()*matrinames.length);
-		        	let matriname = matrinames[index].getDataValue("name");
-		        	
-		        	let name = `${birthname} ${matriname}`;
-		        	let level = 1;
-		        	let xp = 0;
-		        	let pips = 0;
-		        	
-		        	let background = "Sap tapper";
-		        	let birthSign = "Mother";
-		        	let coat = "Grey";
-		        	let pattern = "Flecked";
+		        	if( !birthSign ) {
+		        		birthSign = "Mother";
+		        	}
+		        	if( !coat ) {
+		        		coat = "Grey";
+		        	}
+		        	if( !pattern ) {
+		        		pattern = "Flecked";
+		        	}
 		        	
 		        	let str = roll.roll('3d6b2').result;
 		        	let dex = roll.roll('3d6b2').result;
 		        	let wil = roll.roll('3d6b2').result;
 		        	
-		        	let weapons = await Item.findAllByItemName("Improvised Weapon");
-		        	let weapon = null;
-		        	if( weapons && weapons.length>0 ) {
-		        		weapon = weapons[0];
-		        	}
-		        	var inventoryEntry = InventoryEntry.createFromItem(weapon);
-			    	//var entry = await inventoryEntry.save();
-			    	//character.addInventoryEntry(entry);
-			    	//var client = message.client;
+		        	let hp = roll.roll('1d6').result;
+		        	let xp = 0;
+		        	let pips = roll.roll('1d6').result;
 		        	
-		        	console.log(weapon);
+		        	let level = 1;
+		        	let item1 = null;
+		        	let item2 = null;
+		        	
+		        	try {
+			        	if( !background ) {
+			        		var b = await Background.findOneByHPPips(1, pips);
+			        		
+			        		if( b ) {
+			        			let item = b.getDataValue("item1");
+			        			item1 = await Item.findOneByItemName(item);
+			        			
+			        			item = b.getDataValue("item2");
+			        			item2 = await Item.findOneByItemName(item);
+			        			
+			        			background = b.getDataValue("background");
+			        		}
+			        	} else {
+			        		var backgrounds = await Background.findAllByName(background);
+			        		if( !backgrounds ) {
+			        			message.reply(`Invalid background '${background}`);
+			        			return;
+			        		}
+			        	}
+		        	} catch (e) {
+		        		console.log(e);
+		        		return;
+		        	}
 		        	
 		        	character = await Character.create({
 		        		characterName : name,
@@ -129,17 +162,33 @@ module.exports = class MouseCommand extends BaseCommand {
 		        		maxDEX : dex,
 		        		currentWIL : wil,
 		        		maxWIL : wil,
+		        		currentHP : hp,
+		        		maxHP : hp,
 		        		pips : pips
 		        	});
 		        	
-		        	await character.addInventoryEntry(inventoryEntry);
+		        	await character.save();
 		        	
-		        	let char=`Name: ${name}`;
-		        	char += `\nLevel: ${level}`;
-		        	char += `\nBackground: ${background}`;
-		        	char += `\nSTR: ${str}\nDEX: ${dex}\nWIL: ${wil}`;
+		        	/*
+		        	let weapon = await Item.findOneByItemName("Improvised Weapon");
+		        	var inventoryEntry = InventoryEntry.createFromItem(weapon);
+			    	var entry = await inventoryEntry.save();
+		        	character.addInventoryEntry(entry);
 		        	
-		        	message.channel.send(char);
+		        	let rations = await Item.findOneByItemName("Rations");
+		        	inventoryEntry = InventoryEntry.createFromItem(rations);
+			    	entry = await inventoryEntry.save();
+		        	character.addInventoryEntry(entry);
+		        	*/
+		        	var inventoryEntry = InventoryEntry.createFromItem(item1);
+		        	var entry = await inventoryEntry.save();
+		        	character.addInventoryEntry(entry);
+		        	
+		        	inventoryEntry = InventoryEntry.createFromItem(item2);
+		        	entry = await inventoryEntry.save();
+		        	character.addInventoryEntry(entry);
+
+		        	Utils.CharacterUtils.displayCharacter(message, character);
 		        	break;
 		    }
 		}
@@ -151,9 +200,6 @@ module.exports = class MouseCommand extends BaseCommand {
 				if( !character ) {
 					message.reply("You don't have a mouse registered. (Use ``!mouse create`` to create one!)");
 				} else {
-					console.log(character);
-					var entries = await character.getInventoryEntries();
-					console.log(entries);
 					Utils.CharacterUtils.displayCharacter(message, character);
 				}
 			});

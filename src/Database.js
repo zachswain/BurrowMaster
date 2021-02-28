@@ -67,6 +67,8 @@ class Database {
 		      	break;
 		    }
 		    
+		    source[target.name] = target;
+		    
 		    console.log("added relationship, " + source.name + " " + relatedTo.relationship + " " + target.name);
 		  })
 		});

@@ -68,6 +68,16 @@ Object.assign(module.exports, {
     	    type : Sequelize.INTEGER,
     	    allowNull : false
     	},
+    	currentHP : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false,
+    	    defaultValue : 0
+    	},
+    	maxHP : {
+    	    type : Sequelize.INTEGER,
+    	    allowNull : false,
+    	    defaultValue : 0
+    	},
     	pips : {
     	  type : Sequelize.INTEGER,
     	  defaultValue : 0

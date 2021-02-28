@@ -1,0 +1,44 @@
+[
+    {
+        "hp" : 1,
+        "pips" : 1,
+        "background" : "Test Subject",
+        "item1" : "Spell: Magic Missile",
+        "item2" : "Lead coat"
+    },
+    {
+        "hp" : 1,
+        "pips" : 2,
+        "background" : "Kitchen Forager",
+        "item1" : "Shield & Jerkin",
+        "item2" : "Cookpots"
+    },
+    {
+        "hp" : 1,
+        "pips" : 3,
+        "background" : "Cage Dweller",
+        "item1" : "Spell: Be Understood",
+        "item2" : "Bottle of milk"
+    },
+    {
+        "hp" : 1,
+        "pips" : 4,
+        "background" : "Hedge Witch",
+        "item1" : "Spell: Heal",
+        "item2" : "Incense stick"
+    },
+    {
+        "hp" : 1,
+        "pips" : 5,
+        "background" : "Leather Worker",
+        "item1" : "Shield & Jerkin",
+        "item2" : "Shears"
+    },
+    {
+        "hp" : 1,
+        "pips" : 6,
+        "background" : "Street Tough",
+        "item1" : "Dagger",
+        "item2" : "Flask of coffee"
+    }
+]

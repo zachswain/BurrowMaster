@@ -156,5 +156,23 @@ module.exports = {
 		});
 		
 		return promise;
+	},
+	
+	async toInventoryDisplay(inventoryItem) {
+		let item = await inventoryItem.getItem();
+		let name = item.getDataValue('name');
+		let str = `${name}`;
+		
+		if( item.getDataValue('type')=='Weapon' ) {
+			str += ` (${item.getDataValue('damageDice')}, ${"o".repeat(item.getDataValue('uses'))})`;
+		} else if( item.getDataValue('type')=='Trade Good' || item.getDataValue('type')=='Spell' || item.getDataValue('type')=='Armor' ) {
+			if( item.getDataValue('uses') && item.getDataValue('uses')>0 ) {
+				var used=inventoryItem.getDataValue("used");
+				var uses=item.getDataValue("uses");
+				str += ` (${"x".repeat(used)}${"o".repeat(uses-used)})`;
+			}
+		}
+		
+		return str;
 	}
 }

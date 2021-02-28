@@ -8,7 +8,11 @@ const Database = require("../Database.js");
 
 Object.assign(module.exports, {
     model : {
-
+        used : {
+            type : Sequelize.INTEGER,
+            allowNull : false,
+            defaultValue : 0
+        }
     },
     
     relationships : [
