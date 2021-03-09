@@ -107,7 +107,7 @@ Object.assign(module.exports, {
     
     getCharacterByAuthorID(authorID) {
         var model = Database.getModel(this.modelName);
-		return model.findOne({ where : { authorID : authorID }}, { include : Database.getModel(InventoryEntry.modelName) });
+		return model.findOne({ where : { authorID : authorID }, include : [ Database.getModel(InventoryEntry.modelName) ] });
     },
     
     getCharacterByCharacterName(characterName) {

@@ -180,13 +180,13 @@ module.exports = class MouseCommand extends BaseCommand {
 			    	entry = await inventoryEntry.save();
 		        	character.addInventoryEntry(entry);
 		        	*/
-		        	var inventoryEntry = InventoryEntry.createFromItem(item1);
-		        	var entry = await inventoryEntry.save();
-		        	character.addInventoryEntry(entry);
+		        	var inventoryEntry = await InventoryEntry.createFromItem(item1);
+		        	//var entry = await inventoryEntry.save();
+		        	await character.addInventoryEntry(inventoryEntry);
 		        	
-		        	inventoryEntry = InventoryEntry.createFromItem(item2);
-		        	entry = await inventoryEntry.save();
-		        	character.addInventoryEntry(entry);
+		        	inventoryEntry = await InventoryEntry.createFromItem(item2);
+		        	//entry = await inventoryEntry.save();
+		        	await character.addInventoryEntry(inventoryEntry);
 
 		        	Utils.CharacterUtils.displayCharacter(message, character);
 		        	break;

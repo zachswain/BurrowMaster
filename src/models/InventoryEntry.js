@@ -19,11 +19,14 @@ Object.assign(module.exports, {
         { modelName : Item.modelName, relationship : "belongsTo" }
     ],
     
-    createFromItem(item) {
+    create(args, options=null) {
         var model = Database.getModel(this.modelName);
-        var entry = model.build({
-        });
-        entry.setItem(item);
-        return entry;
+        return model.create(args, options);
+    },
+    
+    createFromItem(item, options=null) {
+        var model = Database.getModel(this.modelName);
+        return model.create({ ItemId : item.id }, options);
+
     }
 })

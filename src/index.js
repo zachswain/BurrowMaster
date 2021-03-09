@@ -24,6 +24,7 @@ bot.registry
 	.registerDefaultTypes()
 	.registerGroups([
         "characters",
+        "items",
         "roll"
 	])
 	.registerDefaultGroups()

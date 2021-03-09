@@ -40,5 +40,215 @@
         "background" : "Street Tough",
         "item1" : "Dagger",
         "item2" : "Flask of coffee"
+    },
+    {
+        "hp" : 2,
+        "pips" : 1,
+        "background" : "Mendicant Priest",
+        "item1" : "Spell: Restore",
+        "item2" : "Holy Symbol"
+    },
+    {
+        "hp" : 2,
+        "pips" : 2,
+        "background" : "Beetleherd",
+        "item1" : "Hireling: Loyal Beetle",
+        "item2" : "Pole (6\")"
+    },
+    {
+        "hp" : 2,
+        "pips" : 3,
+        "background" : "Ale Brewer",
+        "item1" : "Hireling: Drunken Torchbearer",
+        "item2" : "Small barrel of ale"
+    },
+    {
+        "hp" : 2,
+        "pips" : 4,
+        "background" : "Fishermouse",
+        "item1" : "Net",
+        "item2" : "Needle"
+    },
+    {
+        "hp" : 2,
+        "pips" : 5,
+        "background" : "Blackmsith",
+        "item1" : "Hammer",
+        "item2" : "Metal file"
+    },
+    {
+        "hp" : 2,
+        "pips" : 6,
+        "background" : "Wireworker",
+        "item1" : "Wire (spool)",
+        "item2" : "Electric lantern"
+    },
+    {
+        "hp" : 3,
+        "pips" : 1,
+        "background" : "Woodcutter",
+        "item1" : "Axe",
+        "item2" : "Twine (spool)"
+    },
+    {
+        "hp" : 3,
+        "pips" : 2,
+        "background" : "Bat cultist",
+        "item1" : "Spell: Darkness",
+        "item2" : "Bag of bat teeth"
+    },
+    {
+        "hp" : 3,
+        "pips" : 3,
+        "background" : "Tin miner",
+        "item1" : "Pickaxe",
+        "item2" : "Lantern"
+    },
+    {
+        "hp" : 3,
+        "pips" : 4,
+        "background" : "Trash collector",
+        "item1" : "Trashhook",
+        "item2" : "Mirror"
+    },
+    {
+        "hp" : 3,
+        "pips" : 5,
+        "background" : "Wall rover",
+        "item1" : "Fishhook",
+        "item2" : "Thread (spool)"
+    },
+    {
+        "hp" : 3,
+        "pips" : 6,
+        "background" : "Merchant",
+        "item1" : "Hireling: Pack rat",
+        "item2" : "20p IOU from a noblemouse"
+    },
+    {
+        "hp" : 4,
+        "pips" : 1,
+        "background" : "Raft crew",
+        "item1" : "Hammer",
+        "item2" : "Wooden spikes"
+    },
+    {
+        "hp" : 4,
+        "pips" : 2,
+        "background" : "Worm wrangler",
+        "item1" : "Pole (6\")",
+        "item2" : "Soap"
+    },
+    {
+        "hp" : 4,
+        "pips" : 3,
+        "background" : "Sparrow rider",
+        "item1" : "Fishhook",
+        "item2" : "Goggles"
+    },
+    {
+        "hp" : 4,
+        "pips" : 4,
+        "background" : "Sewer guide",
+        "item1" : "Metal file",
+        "item2" : "Thread (spool)"
+    },
+    {
+        "hp" : 4,
+        "pips" : 5,
+        "background" : "Prison guard",
+        "item1" : "Chain (6\")",
+        "item2" : "Spear"
+    },
+    {
+        "hp" : 4,
+        "pips" : 6,
+        "background" : "Fungus farmer",
+        "item1" : "Dried mushrooms",
+        "item2" : "Spore mask"
+    },
+    {
+        "hp" : 5,
+        "pips" : 1,
+        "background" : "Dam builder",
+        "item1" : "Shovel",
+        "item2" : "Wooden spikes"
+    },
+    {
+        "hp" : 5,
+        "pips" : 2,
+        "background" : "Cartographer",
+        "item1" : "Quill & ink",
+        "item2" : "Compass"
+    },
+    {
+        "hp" : 5,
+        "pips" : 3,
+        "background" : "Trap thief",
+        "item1" : "Block of cheese",
+        "item2" : "Glue"
+    },
+    {
+        "hp" : 5,
+        "pips" : 4,
+        "background" : "Vagabond",
+        "item1" : "Tent",
+        "item2" : "Treasure map (dubious)"
+    },
+    {
+        "hp" : 5,
+        "pips" : 5,
+        "background" : "Grain farmer",
+        "item1" : "Spear",
+        "item2" : "Whistle"
+    },
+    {
+        "hp" : 5,
+        "pips" : 6,
+        "background" : "Message runner",
+        "item1" : "Bedroll",
+        "item2" : "Documents"
+    },
+    {
+        "hp" : 6,
+        "pips" : 1,
+        "background" : "Troubadour",
+        "item1" : "Musical instrument",
+        "item2" : "Disguise kit"
+    },
+    {
+        "hp" : 6,
+        "pips" : 2,
+        "background" : "Gambler",
+        "item1" : "Loaded dice",
+        "item2" : "Mirror"
+    },
+    {
+        "hp" : 6,
+        "pips" : 3,
+        "background" : "Sap tapper",
+        "item1" : "Bucket",
+        "item2" : "Wooden spikes"
+    },
+    {
+        "hp" : 6,
+        "pips" : 4,
+        "background" : "Bee keeper",
+        "item1" : "Jar of honey",
+        "item2" : "Net"
+    },
+    {
+        "hp" : 6,
+        "pips" : 5,
+        "background" : "Librarian",
+        "item1" : "Scrap of obscure book",
+        "item2" : "Quill & ink"
+    },
+    {
+        "hp" : 6,
+        "pips" : 6,
+        "background" : "Pauper noblemouse",
+        "item1" : "Felt hat",
+        "item2" : "Perfume"
     }
 ]
